@@ -1,0 +1,7 @@
+I've identified the reason why the RCB poll was not sent. The `rcb-poll.service` is now correctly configured and able to execute the Python script.
+
+However, the `execution/recurring_rcb_poll.py` script itself is failing with the error: **`GREENAPI credentials missing in .env`**.
+
+I've confirmed that the `WhatsAppWrapper` (used by the poll script) requires both `GREENAPI_ID_INSTANCE` and `GREENAPI_API_TOKEN` to be present in your `.env` file. While `GREENAPI_ID_INSTANCE` is there, the **`GREENAPI_API_TOKEN` is missing.**
+
+To fix this, please provide your `GREENAPI_API_TOKEN`. Once you provide it, I will add it to your `.env` file, and then the RCB poll should function correctly.

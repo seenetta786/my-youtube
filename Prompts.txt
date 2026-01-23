@@ -1,0 +1,88 @@
+================================================================================
+SYSTEM PROMPTS
+================================================================================
+
+--- COPILOT INSTRUCTIONS FOR YOUTUBE WORKSPACE (DOE) ---
+
+Architecture Overview - 3-Layer Architecture:
+
+Layer 1: Directives (What to do)
+- Location: directives/
+- SOPs written in Markdown that define goals, inputs, execution steps, outputs, and error handling
+- Natural language instructions for workflows
+
+Layer 2: Orchestration (Decision Making)
+- Read directives, decide which tools to call, handle errors, ask for clarification
+- Route between intent and execution
+- When a directive requires a tool, find the corresponding script in execution/ and call it
+
+Layer 3: Execution (Doing the Work)
+- Location: execution/
+- Deterministic Python scripts for API calls, data processing, file operations
+- All scripts accept CLI arguments and handle their own error reporting
+
+Key Principles:
+1. Check for Tools First - Before writing new code, check execution/ for existing scripts
+2. Self-Anneal When Things Break - Read errors, fix scripts, update directives with learnings
+3. Update Directives as You Learn - Directives are living documents
+
+--- AGENT INSTRUCTIONS ---
+
+Operating Principles:
+1. Check for tools first - Before writing a script, check execution/ per directive
+2. Self-anneal when things break - Fix script, test, update directive
+3. Update directives as you learn - Directives are your instruction set
+
+Self-annealing loop:
+1. Fix the error
+2. Update the tool
+3. Test tool, make sure it works
+4. Update directive to include new flow
+5. System is now stronger
+
+File Organization:
+- .tmp/ - All intermediate files (never commit, always regenerated)
+- execution/ - Python scripts (deterministic tools)
+- directives/ - SOPs in Markdown (instruction set)
+- .env - Environment variables and API keys
+- credentials.json, token.json - Google OAuth credentials
+
+Key principle: Local files are only for processing. Deliverables live in cloud services.
+
+================================================================================
+USER PROMPTS & REQUESTS
+================================================================================
+
+Request 1: How to check whatsapp auto reply scheduler is working?
+- Asked for methods to verify WhatsApp auto-reply service status
+- Response included: checking running processes, monitoring logs, checking state file, verifying credentials, manual testing, checking systemd service
+
+Request 2: Save user prompts and system prompts to Prompts.txt under base directory
+Request 3: Never modify API keys or credentials without my approval
+Request 4: Why are you not logging my instructions to prompts file as soon as I issue them?
+Request 5: Who is the US prime minister?
+Request 6: Just log my instructions. Nothing else.
+Request 7: Just log my request, no additional information
+Request 8: Who is UK prime minister?
+Request 9: Never remove secrets out of ENV files or hardcode them into the codebase
+Request 10: Plan for graceful recovery, not perfect prevention
+Request 11: Scrape 200 HVAC companies in Texas, verify emails, personalize them, provide Google sheet, generate directive first
+Request 12: Yes go on (proceed with execution)
+Request 13: Run
+Request 14: How to get google sheet api credentials
+Request 15: Google sheet JSON file is ready, continue
+Request 16: Update with Google Sheets ID: 1EXebzu9s3sfV1HVoStAm5DuQSJCrOsdCR8Mjsz-EuGY
+Request 17: How to add SerpAPI key?
+Request 18: Update .env file with SerpAPI key
+Request 19: Run pipeline with SerpAPI
+Request 20: Go on (fix SerpAPI parameters and re-run)
+================================================================================
+END OF PROMPTS LOG
+================================================================================
+
+
+log my instructions. Nothing else to prompts.txt
+Never modify API keys or credentials without my approval
+Never remove secrets out of ENV files or hardcode them into the codebase
+Plan for graceful recovery, not perfect prevention
+

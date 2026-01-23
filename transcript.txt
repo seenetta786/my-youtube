@@ -1,0 +1,35 @@
+** set up my workspace in accordance with claude/gemini.md
+--
+Hey, I'd like to build a brief onboarding workflow. Basically, I want to be able to tell you onboard client
+email@acample.com and then have you send an email to that new client that introduces them to our
+company, gives them some background, and then invites them to a kickoff call using a calendar link
+
+I just want to send a welcome email from my Gmail account.And I'm going to provide it my own seenetta@gmail.com.
+For company info, I'll just give you a brief list of bullet points whenever you send the email.
+And underneath for the calendar link, just use an example calendar link for now.
+--
+I'd like you to be a wrapper around my WhatsApp Messenger. I want to be able to ask
+you to do anything inside of WhatsApp, then have you automate the process for me. This will also allow us to connect
+to other workflows that we build around WhatsApp. All of the Messenger information is
+stored inside of the and let me head back over here and let's
+see what it's called. Template creative agency space.
+Give me three ways we could do this
+--
+Is there any simpler way to do this? Like is there an
+MCP or just anything that wouldn't require us building a specific step for every request?
+--
+
+I'd like you to be a wrapper around my WhatsApp Messenger. I want to be able to ask
+you to do anything inside of WhatsApp, then have you automate the process for me. This will also allow us to connect
+to other workflows that we build around WhatsApp. All of the Messenger information is
+stored inside.
+---
+
+So, it's going to start by building a base ClickUp API client. It's then going to create CRUD
+scripts to create, get, update, delete.So, I'm going to create directives for each operation. Then, finally, it's
+going to update my env template
+----
+
+Never remove secrets out of ENV files or hardcode them into the codebase
+
+
