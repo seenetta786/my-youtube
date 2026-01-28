@@ -35,7 +35,7 @@ def run_rcb_poll():
         # RCB 2.0 Group ID
         target_id = "120363419563262981@g.us"
         question = "Tomorrow's game"
-        options = ["Yes", "No"]
+        options = ["Yep", "Nope","Maybe"]
         
         result = wrapper.send_poll(target_id, question, options)
         
