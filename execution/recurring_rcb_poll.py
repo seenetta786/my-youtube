@@ -8,10 +8,15 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from execution.whatsapp_messenger import WhatsAppWrapper
 
+# Ensure logging directory exists
+log_dir = ".tmp"
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler(".tmp/recurring_poll.log"), logging.StreamHandler()]
+    handlers=[logging.FileHandler(os.path.join(log_dir, "recurring_poll.log")), logging.StreamHandler()]
 )
 logger = logging.getLogger(__name__)
 
