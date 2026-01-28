@@ -3,7 +3,7 @@ import sys
 import logging
 from datetime import datetime
 
-# Add the project root to sys.path if needed
+# Add the project root to sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from execution.whatsapp_messenger import WhatsAppWrapper
@@ -19,11 +19,12 @@ def run_rcb_poll():
     logger.info("Starting recurring RCB 2.0 poll...")
     try:
         wrapper = WhatsAppWrapper()
-        group_id = "120363419563262981@g.us"
+        # RCB 2.0 Group ID
+        target_id = "120363419563262981@g.us"
         question = "Tomorrow's game"
         options = ["Yes", "No"]
         
-        result = wrapper.send_poll(group_id, question, options)
+        result = wrapper.send_poll(target_id, question, options)
         
         if "error" in result:
             logger.error(f"Failed to send poll: {result['error']}")

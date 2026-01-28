@@ -1,0 +1,31 @@
+name: Recurring WhatsApp Poll
+
+on:
+  schedule:
+    # 6:00 PM IST is 12:30 PM UTC. 
+    # Run at 12:30 PM UTC on Sun, Mon, Tue, Wed, Thu, Sat (All except Friday).
+    - cron: '30 12 * * 0-4,6'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  send_poll:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install whatsapp-api-client-python python-dotenv
+
+      - name: Run WhatsApp Poll Script
+        env:
+          GREENAPI_ID_INSTANCE: ${{ secrets.GREENAPI_ID_INSTANCE }}
+          GREENAPI_API_TOKEN: ${{ secrets.GREENAPI_API_TOKEN }}
+        run: python execution/recurring_rcb_poll.py
