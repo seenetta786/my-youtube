@@ -187,9 +187,12 @@ def send_compliment():
         logger.info("Initializing WhatsApp wrapper...")
         wrapper = WhatsAppWrapper()
         
-        # Check instance state
-        state_resp = wrapper.client.serviceMethods.getStateInstance()
-        logger.info(f"Green API Instance State: {state_resp.data}")
+        # Check instance state (optional, don't crash if this fails)
+        try:
+            state_resp = wrapper.client.account.getStateInstance()
+            logger.info(f"Green API Instance State: {state_resp.data}")
+        except Exception as e:
+            logger.warning(f"Could not check instance state: {e}")
         
         # ShYlpA Jid (Reconstructed from previous logs)
         target_id = "919481546119@c.us" 
