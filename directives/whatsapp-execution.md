@@ -49,3 +49,11 @@ If a service fails:
 2. Verify Green API instance status at [console.green-api.com](https://console.green-api.com/).
 3. Use **Workflow Dispatch** (manual trigger) in the Actions tab to re-run a missed message.
 4. Run [check_status.py](file:///media/seanetta/RXX/ai/YouTube%20Workspace(DOE)/execution/check_status.py) locally to verify API connectivity.
+
+## Maintenance Notes
+
+### Reverting Temporary Schedules
+To revert the ShYlpA compliment service to its original daily schedule (Jan 30 onwards):
+- **File**: [.github/workflows/shylpa_compliment.yml](file:///media/seanetta/RXX/ai/YouTube%20Workspace(DOE)/.github/workflows/shylpa_compliment.yml)
+- **Original Cron**: `5 0 * * *` (05:35 IST)
+- **Status Change**: Remove the `[TEMPORARY]` notice in this directive.
