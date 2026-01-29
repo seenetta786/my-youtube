@@ -186,6 +186,11 @@ def send_compliment():
     try:
         logger.info("Initializing WhatsApp wrapper...")
         wrapper = WhatsAppWrapper()
+        
+        # Check instance state
+        state_resp = wrapper.client.serviceMethods.getStateInstance()
+        logger.info(f"Green API Instance State: {state_resp.data}")
+        
         # ShYlpA Jid (Reconstructed from previous logs)
         target_id = "919481546119@c.us" 
         message = random.choice(COMPLIMENTS)

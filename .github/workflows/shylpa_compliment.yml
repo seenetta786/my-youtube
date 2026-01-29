@@ -27,8 +27,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install whatsapp-api-client-python python-dotenv
 
+      - name: Verify Environment Variables
+        run: |
+          echo "Checking if GREENAPI secrets are available..."
+          if [ -z "${{ secrets.GREENAPI_ID_INSTANCE }}" ]; then echo "❌ GREENAPI_ID_INSTANCE is NOT set in secrets"; else echo "✅ GREENAPI_ID_INSTANCE is set"; fi
+          if [ -z "${{ secrets.GREENAPI_API_TOKEN }}" ]; then echo "❌ GREENAPI_API_TOKEN is NOT set in secrets"; else echo "✅ GREENAPI_API_TOKEN is set"; fi
+
       - name: Run Compliment Script
         env:
           GREENAPI_ID_INSTANCE: ${{ secrets.GREENAPI_ID_INSTANCE }}
           GREENAPI_API_TOKEN: ${{ secrets.GREENAPI_API_TOKEN }}
-        run: python execution/shylpa_compliment.py
+        run: python3 execution/shylpa_compliment.py

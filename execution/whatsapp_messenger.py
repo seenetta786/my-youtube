@@ -12,8 +12,11 @@ API_TOKEN = os.getenv("GREENAPI_API_TOKEN")
 class WhatsAppWrapper:
     def __init__(self):
         if not ID_INSTANCE or not API_TOKEN:
-            raise ValueError("GREENAPI credentials missing in .env")
-        self.client = GreenApi(idInstance=ID_INSTANCE, apiTokenInstance=API_TOKEN)
+            raise ValueError("GREENAPI credentials missing in environment")
+        
+        # Clean ID_INSTANCE (remove quotes if any)
+        clean_id = str(ID_INSTANCE).strip().replace('"', '').replace("'", "")
+        self.client = GreenApi(idInstance=clean_id, apiTokenInstance=API_TOKEN.strip())
 
     def find_chat(self, name_query):
         # Search in contacts
