@@ -2,6 +2,7 @@ import os
 import sys
 import random
 import logging
+from datetime import datetime, timezone, timedelta
 
 # Add the project root to sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -176,8 +177,13 @@ COMPLIMENTS = [
 ]
 
 def send_compliment():
-    logger.info("Starting ShYlpA compliment service...")
+    now_utc = datetime.now(timezone.utc)
+    now_ist = now_utc + timedelta(hours=5, minutes=30)
+    
+    logger.info(f"Starting ShYlpA compliment service at {now_utc.strftime('%Y-%m-%d %H:%M:%S')} UTC ({now_ist.strftime('%Y-%m-%d %H:%M:%S')} IST)")
+    
     try:
+        logger.info("Initializing WhatsApp wrapper...")
         wrapper = WhatsAppWrapper()
         # ShYlpA Jid (Reconstructed from previous logs)
         target_id = "919481546119@c.us" 
@@ -188,9 +194,11 @@ def send_compliment():
         logger.info(f"API Result: {result}")
         
         if "error" in result:
-            logger.error(f"Failed to send compliment: {result['error']}")
+            logger.error(f"Green API Error: {result['error']}")
+        elif result.get("status") == "success":
+            logger.info(f"Compliment sent successfully! Message ID: {result.get('id')}")
         else:
-            logger.info("Compliment sent successfully!")
+            logger.warning(f"Unexpected API response format: {result}")
             
     except Exception as e:
         logger.error(f"Fatal error: {e}")

@@ -2,8 +2,12 @@ name: ShYlpA Daily Compliment
 
 on:
   schedule:
-    # 5:30 AM IST is 12:00 AM UTC.
-    - cron: '0 0 * * *'
+    # 5:35 AM IST is 12:05 AM UTC. Offset by 5 mins to avoid high-load slot.
+    - cron: '5 0 * * *'
+  push:
+    paths:
+      - '.github/workflows/shylpa_compliment.yml'
+      - 'execution/shylpa_compliment.py'
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 jobs:
