@@ -8,6 +8,7 @@ This directive outlines the operation and maintenance of automated WhatsApp serv
 Sends a random compliment to brighten the recipient's day.
 - **Recipient**: `919481546119@c.us` (ShYlpA)
 - **Schedule**: Daily at 05:35 IST (00:05 UTC)
+- **Status**: [TEMPORARY] Increased to every 30 minutes for Jan 29.
 - **Script**: [shylpa_compliment.py](file:///media/seanetta/RXX/ai/YouTube%20Workspace(DOE)/execution/shylpa_compliment.py)
 - **Workflow**: [shylpa_compliment.yml](file:///media/seanetta/RXX/ai/YouTube%20Workspace(DOE)/.github/workflows/shylpa_compliment.yml)
 
