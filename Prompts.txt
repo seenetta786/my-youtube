@@ -86,3 +86,26 @@ Never modify API keys or credentials without my approval
 Never remove secrets out of ENV files or hardcode them into the codebase
 Plan for graceful recovery, not perfect prevention
 
+meta whatsapp token
+EAAagSzl4em4BQjZBwK0zcCdAKvlGqh37LVZB65PsLv0IZCzxaVaXZCJZCvLa62hXcvoGs0S563ZAENXTvkxNwKFXHXsZCygjZCwKoPcoQseHIRQzl1FhPFjSKLyE8xqQwhe0LfFoopUiAVv9lPO2eAM1JIflAbcATJ51VP6PiAaj0kMZA9Pv8KcLaRDE6J9m78gZDZD
+
+analyze current workspace for poll service
+currently it is configured to ShYlpa ,revert to RCB 2.0 
+scheduler shoud run at 6PM all week days except friday
+there is RCB 2.0 poll service
+Create a Google Cloud Function
+2. Create a Google Cloud Function
+Create a Cloud Function that will handle sending polls.  Here's the basic flow:
+Function Purpose:
+
+Trigger at scheduled times (via Cloud Scheduler)
+Fetch poll data from Firestore/database
+Send interactive poll messages via Green API
+
+
+3. Set Up Google Cloud Scheduler
+Configure a scheduler job to trigger your function:
+
+Go to Cloud Scheduler in Google Cloud Console
+Create a new job with your desired schedule (cron syntax)
+Set the HTTP target to your Cloud Function URL

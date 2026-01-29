@@ -5,3 +5,7 @@ token.json
 credentials-google_sheets.json
 .venv/
 __pycache__/
+
+# Local Netlify folder
+.netlify
+node_modules

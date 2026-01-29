@@ -1,7 +1,7 @@
 import os
 import sys
 import logging
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 # Add the project root to sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -29,9 +29,21 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 def run_rcb_poll():
-    logger.info("Starting recurring RCB 2.0 poll...")
+    now_utc = datetime.now(timezone.utc)
+    now_ist = now_utc + timedelta(hours=5, minutes=30)
+    
+    logger.info(f"Starting recurring RCB 2.0 poll at {now_utc.strftime('%Y-%m-%d %H:%M:%S')} UTC ({now_ist.strftime('%Y-%m-%d %H:%M:%S')} IST)")
+    
     try:
+        logger.info("Initializing WhatsApp wrapper...")
         wrapper = WhatsAppWrapper()
+        
+        # Check instance state
+        try:
+            state_resp = wrapper.client.account.getStateInstance()
+            logger.info(f"Green API Instance State: {state_resp.data}")
+        except Exception as e:
+            logger.warning(f"Could not check instance state: {e}")
         # RCB 2.0 Group ID
         target_id = "120363419563262981@g.us"
         question = "Tomorrow's game"

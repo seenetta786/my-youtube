@@ -2,9 +2,13 @@ name: Recurring WhatsApp Poll
 
 on:
   schedule:
-    # 6:00 PM IST is 12:30 PM UTC. 
-    # Run at 12:30 PM UTC on Mon, Tue, Wed, Thu (Weekdays except Friday).
-    - cron: '30 12 * * 1-4'
+    # 6:05 PM IST is 12:35 PM UTC. Offset by 5 mins.
+    # Run at 12:35 PM UTC on Mon, Tue, Wed, Thu (Weekdays except Friday).
+    - cron: '35 12 * * 1-4'
+  push:
+    paths:
+      - '.github/workflows/whatsapp_poll.yml'
+      - 'execution/recurring_rcb_poll.py'
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 jobs:
@@ -24,8 +28,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install whatsapp-api-client-python python-dotenv
 
+      - name: Verify Environment Variables
+        run: |
+          echo "Checking if GREENAPI secrets are available..."
+          if [ -z "${{ secrets.GREENAPI_ID_INSTANCE }}" ]; then echo "❌ GREENAPI_ID_INSTANCE is NOT set in secrets"; else echo "✅ GREENAPI_ID_INSTANCE is set"; fi
+          if [ -z "${{ secrets.GREENAPI_API_TOKEN }}" ]; then echo "❌ GREENAPI_API_TOKEN is NOT set in secrets"; else echo "✅ GREENAPI_API_TOKEN is set"; fi
+
       - name: Run WhatsApp Poll Script
         env:
           GREENAPI_ID_INSTANCE: ${{ secrets.GREENAPI_ID_INSTANCE }}
           GREENAPI_API_TOKEN: ${{ secrets.GREENAPI_API_TOKEN }}
-        run: python execution/recurring_rcb_poll.py
+        run: python3 execution/recurring_rcb_poll.py
