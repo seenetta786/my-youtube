@@ -3,7 +3,7 @@ name: ShYlpAs Daily Compliment
 on:
   schedule:
     # 5:35 AM IST is 12:05 AM UTC. Offset by 5 mins to avoid high-load slot.
-    - cron: '*/15 * * * *'
+    - cron: '05 0 * * *'
   push:
     paths:
       - '.github/workflows/shylpa_compliment.yml'
