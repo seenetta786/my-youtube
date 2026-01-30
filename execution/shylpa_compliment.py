@@ -205,7 +205,16 @@ def send_compliment():
         if "error" in result:
             logger.error(f"Green API Error: {result['error']}")
         elif result.get("status") == "success":
-            logger.info(f"Compliment sent successfully! Message ID: {result.get('id')}")
+            success_msg = f"Compliment sent successfully! Message ID: {result.get('id')}"
+            logger.info(success_msg)
+            
+            # Log to github_actions.txt for persistence
+            try:
+                log_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "github_actions.txt")
+                with open(log_file, "a") as f:
+                    f.write(f"[{now_ist.strftime('%Y-%m-%d %H:%M:%S')} IST] SUCCESS: {success_msg} | Message: '{message}'\n")
+            except Exception as log_err:
+                logger.warning(f"Failed to write to github_actions.txt: {log_err}")
         else:
             logger.warning(f"Unexpected API response format: {result}")
             

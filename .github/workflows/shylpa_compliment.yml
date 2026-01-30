@@ -13,6 +13,9 @@ on:
 jobs:
   send_compliment:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,3 +41,11 @@ jobs:
           GREENAPI_ID_INSTANCE: ${{ secrets.GREENAPI_ID_INSTANCE }}
           GREENAPI_API_TOKEN: ${{ secrets.GREENAPI_API_TOKEN }}
         run: python3 execution/shylpa_compliment.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add github_actions.txt
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update github_actions.txt [skip ci]"
+          git push
