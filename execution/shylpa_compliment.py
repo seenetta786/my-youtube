@@ -210,11 +210,20 @@ def send_compliment():
             
             # Log to github_actions.txt for persistence
             try:
-                log_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "github_actions.txt")
+                project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                
+                # Execution Log
+                log_file = os.path.join(project_root, "github_actions.txt")
                 with open(log_file, "a") as f:
                     f.write(f"[{now_ist.strftime('%Y-%m-%d %H:%M:%S')} IST] SUCCESS: {success_msg} | Message: '{message}'\n")
+                
+                # Dedicated Compliments Log
+                compliments_file = os.path.join(project_root, "compliments.txt")
+                with open(compliments_file, "a") as f:
+                    f.write(f"[{now_ist.strftime('%Y-%m-%d %H:%M:%S')} IST] {message}\n")
+                    
             except Exception as log_err:
-                logger.warning(f"Failed to write to github_actions.txt: {log_err}")
+                logger.warning(f"Failed to write to log files: {log_err}")
         else:
             logger.warning(f"Unexpected API response format: {result}")
             
