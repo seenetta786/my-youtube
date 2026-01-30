@@ -46,6 +46,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add github_actions.txt compliments.txt
+          git add github_actions.txt
           git diff --quiet && git diff --staged --quiet || git commit -m "Update logs [skip ci]"
           git push
