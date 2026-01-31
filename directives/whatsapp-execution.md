@@ -15,7 +15,7 @@ Sends a random compliment to brighten the recipient's day.
 ### 2. RCB 2.0 Recurring Poll
 Sends a daily poll for team coordination.
 - **Recipient**: `120363419563262981@g.us` (RCB 2.0 Group)
-- **Schedule**: Monday to Thursday at 18:05 IST (12:35 UTC)
+- **Schedule**: Daily at 18:05 IST (Except Friday)
 - **Script**: [recurring_rcb_poll.py](file:///media/seanetta/RXX/ai/YouTube%20Workspace(DOE)/execution/recurring_rcb_poll.py)
 - **Workflow**: [whatsapp_poll.yml](file:///media/seanetta/RXX/ai/YouTube%20Workspace(DOE)/.github/workflows/whatsapp_poll.yml)
 

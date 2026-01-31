@@ -3,8 +3,8 @@ name: Recurring WhatsApp Poll
 on:
   schedule:
     # 6:05 PM IST is 12:35 PM UTC. Offset by 5 mins.
-    # Run at 12:35 PM UTC on Mon, Tue, Wed, Thu (Weekdays except Friday).
-    - cron: '35 12 * * 1-4'
+    # Run at 12:35 PM UTC every day except Friday.
+    - cron: '35 12 * * 0-4,6'
   push:
     paths:
       - '.github/workflows/whatsapp_poll.yml'
