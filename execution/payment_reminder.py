@@ -30,12 +30,20 @@ def send_payment_reminder():
         # RCB 2.0 Group ID
         target_id = "120363419563262981@g.us"
         
-        # Beautified Template
+        # Beautified Template (FinalIZED)
         message = (
             "💰 *PAYMENT REMINDER* 💰\n\n"
-            "Hello Team! This is a friendly reminder regarding the monthly dues/fees.\n\n"
-            "✅ *Status:* Pending\n"
-            "📅 *Schedule:* Mon, Wed, Fri\n\n"
+            "Hello Team! This is a friendly reminder regarding the pending dues for February.\n\n"
+            "👤 *Pending Payments (₹1,197 each):*\n"
+            "• Kiran — ₹1,197\n"
+            "• Srinivas — ₹1,197\n"
+            "• Mani — ₹1,197\n"
+            "• Dinkar — ₹1,197\n"
+            "• Praveen — ₹1,197\n"
+            "• Narasimha Reddy — ₹1,197\n"
+            "• Uday — ₹1,197\n"
+            "• Jivan — ₹1,197\n\n"
+            "*UPI ID: firett786@okicici* 🏦✨\n\n"
             "If you have already processed the payment, please *ignore this message* or share the receipt here. "
             "Thank you for your cooperation! 🙏\n\n"
             "---\n"
