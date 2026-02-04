@@ -40,7 +40,7 @@ def send_payment_reminder():
             "• Mani — ₹1,197\n"
             "• Dinkar — ₹1,197\n"
             "• Praveen — ₹1,197\n"
-            "• Narasimha Reddy — ₹1,197\n"
+            "• Narasimha Reddy — ✅ ~₹1,197~ 🟢🟩\n"
             "• Uday — ₹1,197\n"
             "• Jivan — ₹1,197\n\n"
             "*UPI ID: firett786@okicici* 🏦✨\n\n"
