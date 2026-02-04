@@ -40,7 +40,7 @@ def send_payment_reminder():
             "• Mani — ₹1,197\n"
             "• Dinkar — ₹1,197\n"
             "• Praveen — ₹1,197\n"
-            "• Narasimha Reddy — ✅ ~₹1,197~ 🟢🟩\n"
+            "• Narasimha Reddy — ✅ *PAID* 🟢🟩\n"
             "• Uday — ₹1,197\n"
             "• Jivan — ₹1,197\n\n"
             "*UPI ID: firett786@okicici* 🏦✨\n\n"
@@ -57,6 +57,18 @@ def send_payment_reminder():
             logger.error(f"Green API Error: {result['error']}")
         elif result.get("status") == "success" or "id" in result:
             logger.info(f"Reminder sent successfully! Message ID: {result.get('id')}")
+            
+            # Send Image refinement
+            image_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "img", "sennetta.jpeg")
+            if os.path.exists(image_path):
+                logger.info("Sending refinement image...")
+                img_result = wrapper.send_file_by_upload(target_id, image_path, caption="Payment Confirmation")
+                if "error" in img_result:
+                    logger.error(f"Error sending image: {img_result['error']}")
+                else:
+                    logger.info("Image sent successfully!")
+            else:
+                logger.warning(f"Image not found at {image_path}")
         else:
             logger.warning(f"Unexpected API response format: {result}")
             

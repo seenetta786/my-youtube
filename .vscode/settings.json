@@ -1,5 +1,8 @@
 {
-    "accessibility.voice.keywordActivation": "chatInContext",
     "accessibility.voice.autoSynthesize": "on",
-    "accessibility.voice.speechTimeout": 1200
+    "accessibility.voice.speechTimeout": 1200,
+    "accessibility.voice.keywordActivation": "chatInView",
+    "accessibility.signals.chatUserActionRequired": {
+        "sound": "on"
+    }
 }

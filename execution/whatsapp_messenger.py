@@ -60,6 +60,22 @@ class WhatsAppWrapper:
         else:
             return {"error": response.data if response.data else f"Status code {response.code}"}
 
+    def send_file_by_upload(self, target, file_path, caption=""):
+        chat_id = target
+        if "@" not in target:
+            chat_id = self.find_chat(target)
+            if not chat_id:
+                return {"error": f"Contact '{target}' not found"}
+        
+        if not os.path.exists(file_path):
+            return {"error": f"File not found: {file_path}"}
+            
+        response = self.client.sending.sendFileByUpload(chatId=chat_id, path=file_path, caption=caption)
+        if response.code == 200:
+            return {"status": "success", "id": response.data.get("idMessage")}
+        else:
+            return {"error": response.data if response.data else f"Status code {response.code}"}
+
 def main():
     parser = argparse.ArgumentParser(description="WhatsApp Messenger Wrapper")
     parser.add_argument("--to", help="Contact name or ID")
@@ -68,6 +84,8 @@ def main():
     parser.add_argument("--get-chats", action="store_true", help="List all chats")
     parser.add_argument("--poll-question", help="Poll question")
     parser.add_argument("--poll-options", nargs="+", help="Poll options (space separated)")
+    parser.add_argument("--image", help="Path to image file to send")
+    parser.add_argument("--caption", help="Caption for the image/file", default="")
     
     args = parser.parse_args()
     wrapper = WhatsAppWrapper()
@@ -93,6 +111,9 @@ def main():
         print(json.dumps(result, indent=2))
     elif args.to and args.msg:
         result = wrapper.send_message(args.to, args.msg)
+        print(json.dumps(result, indent=2))
+    elif args.to and args.image:
+        result = wrapper.send_file_by_upload(args.to, args.image, args.caption)
         print(json.dumps(result, indent=2))
     else:
         parser.print_help()
