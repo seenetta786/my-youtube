@@ -50,25 +50,19 @@ def send_payment_reminder():
             "🤖 _Automated by RCB Service_"
         )
         
-        logger.info(f"Sending beautified reminder to {target_id}...")
-        result = wrapper.send_message(target_id, message)
+        image_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "img", "sennetta.jpeg")
+        
+        if os.path.exists(image_path):
+            logger.info(f"Sending reminder with image as caption to {target_id}...")
+            result = wrapper.send_file_by_upload(target_id, image_path, caption=message)
+        else:
+            logger.warning(f"Image not found at {image_path}. Falling back to plain text message.")
+            result = wrapper.send_message(target_id, message)
         
         if "error" in result:
             logger.error(f"Green API Error: {result['error']}")
         elif result.get("status") == "success" or "id" in result:
             logger.info(f"Reminder sent successfully! Message ID: {result.get('id')}")
-            
-            # Send Image refinement
-            image_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "img", "sennetta.jpeg")
-            if os.path.exists(image_path):
-                logger.info("Sending refinement image...")
-                img_result = wrapper.send_file_by_upload(target_id, image_path, caption="Payment Confirmation")
-                if "error" in img_result:
-                    logger.error(f"Error sending image: {img_result['error']}")
-                else:
-                    logger.info("Image sent successfully!")
-            else:
-                logger.warning(f"Image not found at {image_path}")
         else:
             logger.warning(f"Unexpected API response format: {result}")
             
